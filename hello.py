@@ -7,8 +7,10 @@ app = Flask(__name__)
 
 # Create a new route
 @app.route('/')
+# def index():
+#     return "<h1>Hello World</h1>"
 def index():
-    return "<h1>Hello World</h1>"
+    return render_template('index.html')
 
 
 # localhost:5000 🚀/user/rokas
