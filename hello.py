@@ -11,10 +11,12 @@ app = Flask(__name__)
 #     return "<h1>Hello World</h1>"
 def index():
     first_name = "Rokas"
+    favourite_pizza = ["Pepperoni", "margarita", "Rokas", "Cheese"]
     stuff = "This is <strong>Bold Text</strong>"
     return render_template('index.html',
                            first_name=first_name,
                            stuff=stuff,
+                           favourite_pizza=favourite_pizza,
                            )
 
 

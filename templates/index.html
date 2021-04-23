@@ -3,3 +3,12 @@
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid ipsam laudantium possimus similique sint sit tenetur. Adipisci, obcaecati, quis.</p>
 
 <p>{{ stuff | striptags}}</p>
+
+<h3>Favourite Pizza:</h3>
+<ul>
+{% for pizza in favourite_pizza %}
+   <li>{{ pizza }}</li>
+{% endfor %}
+    </ul>
+
+{{ favourite_pizza.2}}
