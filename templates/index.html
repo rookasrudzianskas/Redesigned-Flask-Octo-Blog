@@ -4,17 +4,9 @@
 
     <h1>Hello, {{ first_name }}! 🔥</h1>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid ipsam laudantium possimus similique sint sit tenetur. Adipisci, obcaecati, quis.</p>
-
-    <p>{{ stuff | striptags}}</p>
-
-    <h3>Favourite Pizza:</h3>
-    <ul>
-    {% for pizza in favourite_pizza %}
-       <li>{{ pizza }}</li>
-    {% endfor %}
-        </ul>
-
-    {{ favourite_pizza|reverse}}
+<img src="{{ url_for('static', filename='img/Slide.png' )}}" style="width: 400px; height: 550px; transform: rotate(90deg); display: block;margin-left: auto; margin-right: auto;" alt="">
+<br><br>
+<p id="demo">This is stuff</p>
+<script  src="{{ url_for('static', filename='js/main.js' )}}"></script>
 
  {% endblock %}
