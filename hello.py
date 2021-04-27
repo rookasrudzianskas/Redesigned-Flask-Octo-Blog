@@ -12,7 +12,7 @@ app.config['SECRET_KEY'] = "my super secret key that no one knows"
 # Create a form class
 
 class NameForm(FlaskForm):
-    name = StringField("What is your name?", validators=[DataRequired()])
+    name = StringField("What is your name? ㊙️", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 
