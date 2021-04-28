@@ -45,10 +45,27 @@
 </div>
 
 <br><br>
+<table class="table table-striped table-dark table-hover table-bordered" >
+    <thead>
+    <tr>
+        <td style="font-weight: bold">The current user id: 🔥</td>
+        <td style="font-weight: bold">The current user name: 📛</td>
+        <td style="font-weight: bold">The current user email: ✉️</td>
+    </tr>
+    </thead>
+    <tbody>
 {% for our_user in our_users %}
-    {{our_user.id}} - {{our_user.name}}
-    {{our_user.email}}<br>
+<tr>
+    <td>{{our_user.id}}.</td>
+    <td>{{our_user.name}}</td>
+    <td>{{our_user.email}} ✉️</td>
+</tr>
+
+
 {% endfor %}
+    </tbody>
+
+    </table>
 
   {% endif %}
 
