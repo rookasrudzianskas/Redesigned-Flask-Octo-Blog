@@ -22,9 +22,20 @@ db = SQLAlchemy(app)
 
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column()
-    email = db.Column()
-    data_added = db.Column()
+    name = db.Column(db.String(200), nullable=False)
+    email = db.Column(db.String(200), nullable=False, unique=True)
+    data_added = db.Column(db.DateTime, default=datetime.utcnow)
+
+    #      Create a string
+    def __repr__(self):
+        return '<Name %r>' % self.name
+
+
+# Create sign up form
+class UserForm(FlaskForm):
+    name = StringField("Name ✍️", validators=[DataRequired()])
+    email = StringField("Email ✉️️", validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 
 # Create a form class
@@ -32,6 +43,12 @@ class Users(db.Model):
 class NameForm(FlaskForm):
     name = StringField("What is your name? ㊙️", validators=[DataRequired()])
     submit = SubmitField("Submit")
+
+
+@app.route('/user/add', methods=["GET", "POST"])
+def add_user():
+    form = UserForm()
+    return render_template('add_user.html', form=form)
 
 
 # Create a new route
