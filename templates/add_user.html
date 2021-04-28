@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> {{ name }} 👉 {{message}} 🎊
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+
   {% if name %}
     <h1>Hello {{ name }} 🥰</h1>
 
@@ -27,6 +35,12 @@
  {{ form.submit(
     class="btn btn-secondary") }}
 </form>
+
+<br><br>
+{% for our_user in our_users %}
+    {{our_user.id}} - {{our_user.name}}
+    {{our_user.email}}<br>
+{% endfor %}
 
   {% endif %}
 
