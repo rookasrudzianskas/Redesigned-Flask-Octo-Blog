@@ -47,8 +47,28 @@ class NameForm(FlaskForm):
 
 @app.route('/user/add', methods=["GET", "POST"])
 def add_user():
+    # name because first time there is no form name
+    name = None
+    # initializes users form
     form = UserForm()
-    return render_template('add_user.html', form=form)
+    #  validates user form
+    if form.validate_on_submit():
+        # goes to the database users and gets the user which email is entered to the field and stores to users variable
+        user = Users.query.filter_by(email=form.email.data).first()
+        # is there is no user with that email, it creates the user with name and email to the users database
+        if user is None:
+            user = Users(name=form.name.data, email=form.email.data)
+            db.session.add(user)
+            db.session.commit()
+        #     sets the form name, then user is created or found in the db
+        name = form.name.data
+        # clears the form for another user
+        form.name.data = ''
+        form.email.data = ''
+        flash("User added successfully")
+    #     shows what is alraedy added to the db
+    our_users = Users.query.order_by(Users.data_added)
+    return render_template('add_user.html', form=form, name=name, our_users=our_users)
 
 
 # Create a new route
