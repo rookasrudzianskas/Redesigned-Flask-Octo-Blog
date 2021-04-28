@@ -17,6 +17,7 @@
   {% else %}
     <h1>What is your name? 🔥</h1>
 <br>
+<div class="shadow p-3 mb-5 bg-body rounded">
 <form action="" method="POST">
  {{ form.hidden_tag() }}
  {{ form.name.label(
@@ -27,6 +28,7 @@
  {{ form.submit(
     class="btn btn-secondary") }}
 </form>
+</div>
 
   {% endif %}
 

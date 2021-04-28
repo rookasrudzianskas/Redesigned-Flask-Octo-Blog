@@ -8,14 +8,21 @@
 </div>
 {% endfor %}
 
-
+<!-- if the user is added succesfully, the name returned and add info-->
   {% if name %}
-    <h1>Hello {{ name }} 🥰</h1>
+    <h1>User Added 👉 {{ name }} 🥰</h1>
+
+    <br><br>
+    {% for our_user in our_users %}
+        {{our_user.id}} - {{our_user.name}}
+        {{our_user.email}}<br>
+    {% endfor %}
 
 <br>
   {% else %}
     <h1>User List: 🔥</h1>
 <br>
+<div class="shadow p-3 mb-5 bg-body rounded">
 <form action="" method="POST">
  {{ form.hidden_tag() }}
 
@@ -35,6 +42,7 @@
  {{ form.submit(
     class="btn btn-secondary") }}
 </form>
+</div>
 
 <br><br>
 {% for our_user in our_users %}
