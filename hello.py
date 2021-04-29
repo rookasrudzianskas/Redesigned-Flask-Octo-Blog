@@ -59,6 +59,7 @@ def update(id):
         name_to_update.name = request.form['name']
         #  the email becomes the email from the form
         name_to_update.email = request.form['email']
+        # updates the color, the field added recently
         name_to_update.favorite_color = request.form['favorite_color']
         try:
             # tries to update the user, if it updates, so the form gets refreshed and user redirected to update.htmls
