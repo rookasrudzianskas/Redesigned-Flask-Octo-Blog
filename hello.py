@@ -104,7 +104,7 @@ def add_user():
         form.name.data = ''
         form.email.data = ''
         flash("User added successfully")
-    #     shows what is alraedy added to the db
+    #     shows what is already added to the db
     our_users = Users.query.order_by(Users.data_added)
     return render_template('add_user.html', form=form, name=name, our_users=our_users)
 
