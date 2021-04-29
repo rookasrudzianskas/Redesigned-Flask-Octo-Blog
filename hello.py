@@ -51,19 +51,25 @@ def update(id):
     if request.method == "POST":
         # the answer comes true, so the form name becomes the input field value of (name)
         name_to_update.name = request.form['name']
+        #  the email becomes the email from the form
         name_to_update.email = request.form['email']
         try:
+            # tries to update the user, if it updates, so the form gets refreshed and user redirected to update.htmls
             db.session.commit()
-            flash("User Updated Successfully! 🚀")
+            # in the dictionary comes back the name_to_update which has .name and .email properties
+            # we are going to use to put as the value, then entered /update/{{id}}, it puts the value to the inputs
+            flash("updated Successfully! 🚀")
             return render_template("update.html",
                                    form=form,
                                    name_to_update=name_to_update)
         except:
-            flash("User Updated Unsuccessfully! 💁‍♂️")
+            # if the error occurs, just returns to the same form with everything the same
+            flash(" updated Unsuccessfully! 💁‍♂️")
             return render_template("update.html",
                                    form=form,
                                    name_to_update=name_to_update)
-
+    # but if the request becomes the not the POST, the user does not press the submit button, or the form fails, so this means
+    # the page will be refreshed to the same stage as it was before
     else:
         return render_template("update.html",
                                form=form,

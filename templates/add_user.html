@@ -72,6 +72,7 @@
         <td style="font-weight: bold">The current user id: 🔥</td>
         <td style="font-weight: bold">The current user name: 📛</td>
         <td style="font-weight: bold">The current user email: ✉️</td>
+        <td style="font-weight: bold">Just update: 🙃</td>
     </tr>
     </thead>
     <tbody>
@@ -80,6 +81,9 @@
     <td>{{our_user.id}}.</td>
     <td>{{our_user.name}}</td>
     <td>{{our_user.email}} ✉️</td>
+    <td>
+        <a href="{{ url_for('update', id=our_user.id) }}" style=" text-decoration: none;"><button class="btn btn-outline-secondary" style="display: block; margin: auto;">Update</button></a>
+    </td>
 </tr>
 
 

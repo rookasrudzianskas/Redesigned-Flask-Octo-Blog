@@ -3,7 +3,7 @@
 
 {% for message in get_flashed_messages() %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Holy guacamole!</strong>
+  <strong>Holy guacamole!</strong> The user 🙎‍♂️ was {{ message }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endfor %}
@@ -17,20 +17,20 @@
     <h1>User Update: 🔥</h1>
 <br>
 <div class="shadow p-3 mb-5 bg-body rounded">
-<form action="" method="POST">
+<form action="/update/{{ name_to_update.id }}" method="POST">
  {{ form.hidden_tag() }}
 
  {{ form.name.label(
     class="form-label") }}
 
  {{ form.name(
-    class="form-control") }}
+    class="form-control", value=name_to_update.name) }}
     <br>
  {{ form.email.label(
     class="form-label") }}
 
  {{ form.email(
-    class="form-control") }}
+    class="form-control", value=name_to_update.email) }}
 
  <br>
  {{ form.submit(
