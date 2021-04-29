@@ -33,6 +33,13 @@
     class="form-control", value=name_to_update.email) }}
 
  <br>
+
+     {{ form.favorite_color.label(
+    class="form-label") }}
+
+ {{ form.favorite_color(
+    class="form-control", value=name_to_update.favorite_color) }}
+    <br>
  {{ form.submit(
     class="btn btn-secondary") }}
 </form>

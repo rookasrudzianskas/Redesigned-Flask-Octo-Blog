@@ -3,7 +3,10 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
 from datetime import datetime
+
 
 # Create a flask appp
 
@@ -19,6 +22,7 @@ app.config['SECRET_KEY'] = "my super secret key that no one knows"
 # Initialize the database
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 # Create the model for the database
@@ -27,6 +31,7 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(200), nullable=False, unique=True)
+    favorite_color = db.Column(db.String(120))
     data_added = db.Column(db.DateTime, default=datetime.utcnow)
 
     #      Create a string
@@ -38,6 +43,7 @@ class Users(db.Model):
 class UserForm(FlaskForm):
     name = StringField("Name ✍️", validators=[DataRequired()])
     email = StringField("Email ✉️️", validators=[DataRequired()])
+    favorite_color = StringField("Favorite Color")
     submit = SubmitField("Submit")
 
 
@@ -53,6 +59,7 @@ def update(id):
         name_to_update.name = request.form['name']
         #  the email becomes the email from the form
         name_to_update.email = request.form['email']
+        name_to_update.favorite_color = request.form['favorite_color']
         try:
             # tries to update the user, if it updates, so the form gets refreshed and user redirected to update.htmls
             db.session.commit()
@@ -95,7 +102,7 @@ def add_user():
         user = Users.query.filter_by(email=form.email.data).first()
         # is there is no user with that email, it creates the user with name and email to the users database
         if user is None:
-            user = Users(name=form.name.data, email=form.email.data)
+            user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data)
             db.session.add(user)
             db.session.commit()
         #     sets the form name, then user is created or found in the db
@@ -103,6 +110,7 @@ def add_user():
         # clears the form for another user
         form.name.data = ''
         form.email.data = ''
+        form.favorite_color.data = ''
         flash("User added successfully")
     #     shows what is already added to the db
     our_users = Users.query.order_by(Users.data_added)
