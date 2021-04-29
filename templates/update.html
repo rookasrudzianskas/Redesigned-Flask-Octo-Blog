@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+<!-- if the user is added successfully, the name returned and add info-->
+  {% if name %}
+    <h1>User Updated 👉 🥰</h1>
+
+<br>
+  {% else %}
+    <h1>User Update: 🔥</h1>
+<br>
+<div class="shadow p-3 mb-5 bg-body rounded">
+<form action="" method="POST">
+ {{ form.hidden_tag() }}
+
+ {{ form.name.label(
+    class="form-label") }}
+
+ {{ form.name(
+    class="form-control") }}
+    <br>
+ {{ form.email.label(
+    class="form-label") }}
+
+ {{ form.email(
+    class="form-control") }}
+
+ <br>
+ {{ form.submit(
+    class="btn btn-secondary") }}
+</form>
+</div>
+
+<br><br>
+  {% endif %}
+
+ {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash
+from flask import Flask, render_template, flash, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
@@ -39,6 +39,35 @@ class UserForm(FlaskForm):
     name = StringField("Name ✍️", validators=[DataRequired()])
     email = StringField("Email ✉️️", validators=[DataRequired()])
     submit = SubmitField("Submit")
+
+
+# update the database record
+
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    form = UserForm()
+    name_to_update = Users.query.get_or_404(id)
+    # checks if the user have submitted form
+    if request.method == "POST":
+        # the answer comes true, so the form name becomes the input field value of (name)
+        name_to_update.name = request.form['name']
+        name_to_update.email = request.form['email']
+        try:
+            db.session.commit()
+            flash("User Updated Successfully! 🚀")
+            return render_template("update.html",
+                                   form=form,
+                                   name_to_update=name_to_update)
+        except:
+            flash("User Updated Unsuccessfully! 💁‍♂️")
+            return render_template("update.html",
+                                   form=form,
+                                   name_to_update=name_to_update)
+
+    else:
+        return render_template("update.html",
+                               form=form,
+                               name_to_update=name_to_update)
 
 
 # Create a form class
