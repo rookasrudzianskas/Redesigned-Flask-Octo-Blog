@@ -7,7 +7,6 @@ from flask_migrate import Migrate
 
 from datetime import datetime
 
-
 # Create a flask appp
 
 app = Flask(__name__)
@@ -37,6 +36,23 @@ class Users(db.Model):
     #      Create a string
     def __repr__(self):
         return '<Name %r>' % self.name
+
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    user_to_delete = Users.query.get_or_404(id)
+    name = None
+    form = UserForm()
+    try:
+        db.session.delete(user_to_delete)
+        db.session.commit()
+        flash("User deleted successfully 🚀!")
+        our_users = Users.query.order_by(Users.data_added)
+        return render_template('add_user.html', form=form, name=name, our_users=our_users)
+    except:
+        flash("Whoops there was a problem deleting the user 💁‍♂️")
+        our_users = Users.query.order_by(Users.data_added)
+        return render_template('add_user.html', form=form, name=name, our_users=our_users)
 
 
 # Create sign up form
