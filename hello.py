@@ -37,6 +37,7 @@ class Users(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.name
 
+
 # delete the user
 @app.route('/delete/<int:id>')
 def delete(id):
@@ -97,7 +98,8 @@ def update(id):
     else:
         return render_template("update.html",
                                form=form,
-                               name_to_update=name_to_update)
+                               name_to_update=name_to_update,
+                               id=id)
 
 
 # Create a form class
