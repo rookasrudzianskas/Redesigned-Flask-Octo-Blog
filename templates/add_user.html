@@ -83,6 +83,7 @@
         <td style="font-weight: bold">The current user email: ✉️</td>
         <td style="font-weight: bold">Color: 💥️</td>
         <td style="font-weight: bold">Just update: 🙃</td>
+        <td style="font-weight: bold">Just delete: 🙃</td>
     </tr>
     </thead>
     <tbody>
@@ -94,6 +95,9 @@
     <td>{{our_user.favorite_color}}️</td>
     <td>
         <a href="{{ url_for('update', id=our_user.id) }}" style=" text-decoration: none;"><button class="btn btn-outline-secondary" style="display: block; margin: auto;">Update</button></a>
+    </td>
+        <td>
+        <a href="{{ url_for('delete', id=our_user.id) }}" style=" text-decoration: none;"><button class="btn btn-outline-danger" style="display: block; margin: auto;">Delete</button></a>
     </td>
 </tr>
 
