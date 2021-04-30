@@ -37,7 +37,7 @@ class Users(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.name
 
-
+# delete the user
 @app.route('/delete/<int:id>')
 def delete(id):
     user_to_delete = Users.query.get_or_404(id)
