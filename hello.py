@@ -39,7 +39,7 @@ class Users(db.Model):
     @property
     def password(self):
         raise AttributeError('password is not an readable Attribute!')
-
+    # created setter to set the hashes
     @password.setter
     def password(self, password):
         # take whatevther they type in the password field, and generate the hash
