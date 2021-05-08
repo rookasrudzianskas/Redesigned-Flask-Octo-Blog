@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Create a flask appp
 
@@ -32,6 +33,22 @@ class Users(db.Model):
     email = db.Column(db.String(200), nullable=False, unique=True)
     favorite_color = db.Column(db.String(120))
     data_added = db.Column(db.DateTime, default=datetime.utcnow)
+    # Do some password stuff
+    password_hash = db.Column(db.String(128))
+
+    @property
+    def password(self):
+        raise AttributeError('password is not an readable Attribute!')
+
+    @password.setter
+    def password(self, password):
+        # take whatevther they type in the password field, and generate the hash
+        # it takes the password which we enter to the modal, and pass it to the generate function, which generated the hash from it
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        # this one verifies the password, if it is the correct one
+        return check_password_hash(self.password_hash, password)
 
     #      Create a string
     def __repr__(self):
