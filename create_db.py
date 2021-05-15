@@ -6,9 +6,9 @@ mydb = mysql.connector.connect(
     passwd="admin1234"
 )
 
-my_cursor = mydb.cursor()
+# my_cursor = mydb.cursor()
 
-my_cursor.execute("CREATE DATABASE our_users")
+# my_cursor.execute("CREATE DATABASE our_users")
 
 my_cursor.execute("SHOW DATABASES")
 for db in my_cursor:
