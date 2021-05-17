@@ -143,7 +143,9 @@ def add_user():
         user = Users.query.filter_by(email=form.email.data).first()
         # is there is no user with that email, it creates the user with name and email to the users database
         if user is None:
-            user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data, password_hash=form.password_hash.data)
+            # Hash password
+            hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
+            user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data, password_hash=hashed_pw)
             db.session.add(user)
             db.session.commit()
         #     sets the form name, then user is created or found in the db
