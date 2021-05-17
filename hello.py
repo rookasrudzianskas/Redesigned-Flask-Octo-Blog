@@ -145,6 +145,7 @@ def add_user():
         if user is None:
             # Hash password
             hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
+            # outputing hashed one
             user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data, password_hash=hashed_pw)
             db.session.add(user)
             db.session.commit()
