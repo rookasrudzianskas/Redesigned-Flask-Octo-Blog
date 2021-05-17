@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, request
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, ValidationError
+from wtforms.validators import DataRequired, EqualTo, Length
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -81,6 +81,8 @@ class UserForm(FlaskForm):
     name = StringField("Name ✍️", validators=[DataRequired()])
     email = StringField("Email ✉️️", validators=[DataRequired()])
     favorite_color = StringField("Favorite Color")
+    password_hash = PasswordField('Password', validators=[DataRequired(), EqualTo('password_hash2', message="Passwords Must Match")])
+    password_hash2 = PasswordField('Confirm Password', validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 
@@ -141,7 +143,7 @@ def add_user():
         user = Users.query.filter_by(email=form.email.data).first()
         # is there is no user with that email, it creates the user with name and email to the users database
         if user is None:
-            user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data)
+            user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data, password_hash=form.password_hash.data)
             db.session.add(user)
             db.session.commit()
         #     sets the form name, then user is created or found in the db
@@ -150,6 +152,7 @@ def add_user():
         form.name.data = ''
         form.email.data = ''
         form.favorite_color.data = ''
+        form.password_hash = ''
         flash("User added successfully")
     #     shows what is already added to the db
     our_users = Users.query.order_by(Users.data_added)
