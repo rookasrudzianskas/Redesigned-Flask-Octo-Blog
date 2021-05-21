@@ -14,7 +14,6 @@ app = Flask(__name__)
 # Add the database
 
 
-
 # old sqllite db
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 # new mysql db
@@ -81,7 +80,8 @@ class UserForm(FlaskForm):
     name = StringField("Name ✍️", validators=[DataRequired()])
     email = StringField("Email ✉️️", validators=[DataRequired()])
     favorite_color = StringField("Favorite Color")
-    password_hash = PasswordField('Password', validators=[DataRequired(), EqualTo('password_hash2', message="Passwords Must Match")])
+    password_hash = PasswordField('Password', validators=[DataRequired(),
+                                                          EqualTo('password_hash2', message="Passwords Must Match")])
     password_hash2 = PasswordField('Confirm Password', validators=[DataRequired()])
     submit = SubmitField("Submit")
 
@@ -124,6 +124,12 @@ def update(id):
                                id=id)
 
 
+class PasswordForm(FlaskForm):
+    email = StringField("What is your email? ㊙️", validators=[DataRequired()])
+    password_hash = PasswordField("What is your password? ㊙️", validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+
 # Create a form class
 
 class NameForm(FlaskForm):
@@ -146,7 +152,8 @@ def add_user():
             # Hash password
             hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
             # outputing hashed one
-            user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data, password_hash=hashed_pw)
+            user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data,
+                         password_hash=hashed_pw)
             db.session.add(user)
             db.session.commit()
         #     sets the form name, then user is created or found in the db
@@ -194,6 +201,27 @@ def page_not_found(e):
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template("500.html"), 500
+
+
+# Create password test page
+@app.route('/test_pw', methods=["GET", "POST"])
+def test_pw():
+    email = None
+    password = None
+    pw_to_check = None
+    passed = None
+    form = PasswordForm()
+    # validate form
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password_hash.data
+        form.email.data = ''
+        form.password_hash.data = ''
+
+    return render_template("test_pw.html",
+                           email=email,
+                           password=password,
+                           )
 
 
 # Create name page
