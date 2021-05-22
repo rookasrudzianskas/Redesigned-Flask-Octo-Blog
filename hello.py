@@ -126,7 +126,7 @@ def update(id):
 
 class PasswordForm(FlaskForm):
     email = StringField("What is your email? ㊙️", validators=[DataRequired()])
-    password_hash = PasswordField("What is your password? ㊙️", validators=[DataRequired()])
+    password = PasswordField("What is your password? ㊙️", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 
@@ -211,16 +211,16 @@ def test_pw():
     pw_to_check = None
     passed = None
     form = PasswordForm()
-    # validate form
     if form.validate_on_submit():
         email = form.email.data
-        password = form.password_hash.data
+        password = form.password.data
         form.email.data = ''
-        form.password_hash.data = ''
+        form.password.data = ''
 
     return render_template("test_pw.html",
                            email=email,
                            password=password,
+                           form=form,
                            )
 
 
