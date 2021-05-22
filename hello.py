@@ -216,11 +216,20 @@ def test_pw():
         password = form.password.data
         form.email.data = ''
         form.password.data = ''
+        # we are going to go per the users database and check if that email exists, then first one is found, we just return it
+        pw_to_check = Users.query.filter_by(email=email).first()
+
+        #     check hash password
+        #  will return true or not
+        passed = check_password_hash(pw_to_check.password_hash, password)
+        print(passed)
 
     return render_template("test_pw.html",
                            email=email,
                            password=password,
+                           pw_to_check=pw_to_check,
                            form=form,
+                           passed=passed,
                            )
 
 
