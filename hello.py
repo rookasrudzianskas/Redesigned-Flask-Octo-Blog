@@ -42,7 +42,7 @@ class Posts(db.Model):
 #     create a post form
 class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
-    content = StringField("Content", validators=[DataRequired()], widget=TextArea)
+    content = StringField("Content", validators=[DataRequired()], widget=TextArea())
     author = StringField("Author", validators=[DataRequired()])
     slug = StringField("Slug", validators=[DataRequired()])
     submit = SubmitField("Submit")
@@ -62,14 +62,14 @@ def add_post():
         form.author.data = ""
         form.slug.data = ""
 
-#         add post data to db
+        #         add post data to db
 
         db.session.add(post)
         db.session.commit()
 
         # Return a message
         flash("Blog Post was Submitted Successfully")
-#         redirect
+    #         redirect
     return render_template("add_post.html", form=form)
 
 
