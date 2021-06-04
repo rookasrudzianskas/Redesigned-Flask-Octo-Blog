@@ -38,6 +38,7 @@ def get_current_date():
 
     return favourite_pizza
     # return {"Date": date.today()}
+# something
 
 
 # Create the model for the database
