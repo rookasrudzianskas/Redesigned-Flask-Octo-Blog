@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from datetime import date
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from wttforms.widgets import TextArea
 
 # Create a flask appp
 
@@ -37,7 +38,25 @@ class Posts(db.Model):
     # something like adds _ to the url
     slug = db.Column(db.String(255))
 
+
 #     create a post form
+class PostForm(FlaskForm):
+    title = StringField("Title", validators=[DataRequired()])
+    content = StringField("Content", validators=[DataRequired()], widget=TextArea)
+    author = StringField("Author", validators=[DataRequired()])
+    slug = StringField("Slug", validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+
+#     Add post page
+
+@app.route('/add-post', methods=["GET", "POST"])
+def add_post():
+    form = PostForm()
+
+    if form.validate_on_submit():
+        post = Posts(title=form.title.data, content=form.content.data, author=form.author.data, slug=form.slug.data)
+
 
 
 
