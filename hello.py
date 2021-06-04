@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from datetime import date
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from wttforms.widgets import TextArea
+from wtforms.widgets import TextArea
 
 # Create a flask appp
 
@@ -56,8 +56,21 @@ def add_post():
 
     if form.validate_on_submit():
         post = Posts(title=form.title.data, content=form.content.data, author=form.author.data, slug=form.slug.data)
+        # clear the form
+        form.title.data = ""
+        form.content.data = ""
+        form.author.data = ""
+        form.slug.data = ""
 
+#         add post data to db
 
+        db.session.add(post)
+        db.session.commit()
+
+        # Return a message
+        flash("Blog Post was Submitted Successfully")
+#         redirect
+    return render_template("add_post.html", form=form)
 
 
 # JSON everything
