@@ -50,6 +50,11 @@ class PostForm(FlaskForm):
 
 #     Add post page
 
+@app.route('/posts')
+def posts():
+    return render_template("posts.html")
+
+
 @app.route('/add-post', methods=["GET", "POST"])
 def add_post():
     form = PostForm()
