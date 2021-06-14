@@ -11,4 +11,15 @@
 <h1>Blog Posts...</h1>
 <br>
 
+{% for post in posts%}
+<div class="shadow p-3 mb-5 bg-body rounded">
+
+    <h2>{{ post.title }}</h2>
+    By: {{ post.author }} <br>
+    {{ post.slug }} <br>
+    {{ post.date_posted }} <br><br>
+</div>
+<br>
+{% endfor %}
+
 {% endblock %}
