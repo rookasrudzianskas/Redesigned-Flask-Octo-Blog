@@ -16,8 +16,9 @@
 
     <h2>{{ post.title }}</h2>
     By: {{ post.author }} <br>
-    {{ post.slug }} <br>
-    {{ post.date_posted }} <br><br>
+    <small>{{ post.slug }} <br>
+    {{ post.date_posted }} </small><br><br>
+  {{ post.content}}<br>
 </div>
 <br>
 {% endfor %}
