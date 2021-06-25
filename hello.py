@@ -26,6 +26,7 @@ app.config['SECRET_KEY'] = "my super secret key that no one knows"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+# this really works
 
 # create a blog post model
 
