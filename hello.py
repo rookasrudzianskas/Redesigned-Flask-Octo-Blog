@@ -14,7 +14,6 @@ from wtforms.widgets import TextArea
 app = Flask(__name__)
 # Add the database
 
-
 # old sqllite db
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 # new mysql db
@@ -25,6 +24,7 @@ app.config['SECRET_KEY'] = "my super secret key that no one knows"
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
 
 # this really works
 
@@ -55,6 +55,12 @@ class PostForm(FlaskForm):
 def posts():
     posts = Posts.query.order_by(Posts.date_posted)
     return render_template("posts.html", posts=posts)
+
+
+@app.route('/posts/<int:id>')
+def post(id):
+    post = Posts.query.get_or_404(id)
+    return render_template('post.html', post=post)
 
 
 @app.route('/add-post', methods=["GET", "POST"])
