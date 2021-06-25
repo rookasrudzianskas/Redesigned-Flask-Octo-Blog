@@ -17,11 +17,12 @@
     By: {{ post.author }} <br>
     <small>{{ post.slug }} <br>
     {{ post.date_posted }} </small><br><br>
-  {{ post.content}}<br>
+  {{ post.content}}<br><br>
+    <a href="{{ url_for('posts') }}" class="btn btn-dark">Back To Block 👈</a>
+
 </div>
 <br>
 
-<a href="{{ url_for('posts') }}" class="btn btn-dark">Back To Block 👈</a>
 <!--this is ti-->
 
 {% endblock %}
