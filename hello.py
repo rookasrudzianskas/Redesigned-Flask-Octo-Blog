@@ -81,6 +81,12 @@ def edit_post(id):
         flash("Post has been updated 🚀")
         return redirect(url_for("post", id=post.id))
 
+    form.title.data = post.title
+    form.author.data = post.author
+    form.slug.data = post.slug
+    form.content.data = post.content
+
+    return  render_template("edit_post.html", form=form)
 
 @app.route('/add-post', methods=["GET", "POST"])
 def add_post():
