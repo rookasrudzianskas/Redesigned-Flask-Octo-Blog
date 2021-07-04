@@ -20,6 +20,7 @@
     {{ post.date_posted }} </small><br><br>
   {{ post.content}}<br><br>
     <a class="btn btn-dark" href="{{ url_for('post', id=post.id )}}">View Post 👉</a>
+    <a class="btn btn-dark" href="{{ url_for('edit_post', id=post.id )}}">Edit Post 🚀</a>
 
 </div>
 <br>
