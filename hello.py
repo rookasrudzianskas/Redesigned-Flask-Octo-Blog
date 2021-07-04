@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, request
+from flask import Flask, render_template, flash, request, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField, ValidationError
 from wtforms.validators import DataRequired, EqualTo, Length
@@ -73,6 +73,13 @@ def edit_post(id):
         post.author = form.author.data
         post.slug = form.slug.data
         post.content = form.content.data
+
+#         add to the database, update the
+
+        db.session.add(post)
+        db.session.commit()
+        flash("Post has been updated 🚀")
+        return redirect(url_for("post", id=post.id))
 
 
 @app.route('/add-post', methods=["GET", "POST"])
