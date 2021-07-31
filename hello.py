@@ -66,8 +66,11 @@ def delete_post(id):
         return render_template("posts.html", posts=posts)
 
     except:
+        # the message
         flash("Whoops. There was a problem! Error: deleting failed successfully")
-
+        posts = Posts.query.order_by(Posts.date_posted)
+        # redirecting the user to the home
+        return render_template("posts.html", posts=posts)
 
 
 @app.route('/posts')
