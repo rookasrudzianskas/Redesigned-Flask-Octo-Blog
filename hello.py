@@ -52,6 +52,19 @@ class PostForm(FlaskForm):
 
 #     Add post page 🚀
 
+@app.route('/posts/delete/<int:id>')
+def delete_post(id):
+    post_to_delete = Posts.query.get_or_404(id)
+
+    try:
+        db.session.delete(post_to_delete)
+        db.session.commit()
+
+    #     return the message to the
+
+        flash("Blog Post was deleted successfully")
+    except:
+
 @app.route('/posts')
 def posts():
     posts = Posts.query.order_by(Posts.date_posted)
