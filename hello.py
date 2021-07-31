@@ -50,7 +50,7 @@ class PostForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
-#     Add post page
+#     Add post page 🚀
 
 @app.route('/posts')
 def posts():
