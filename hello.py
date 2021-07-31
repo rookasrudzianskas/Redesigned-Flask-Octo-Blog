@@ -63,6 +63,11 @@ def delete_post(id):
     #     return the message to the
 
         flash("Blog Post was deleted successfully")
+
+        # redirecting the user to the home
+        posts = Posts.query.order_by(Posts.date_posted)
+        return render_template("posts.html", posts=posts)
+
     except:
 
 @app.route('/posts')
