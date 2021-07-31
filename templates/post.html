@@ -19,6 +19,7 @@
     {{ post.date_posted }} </small><br><br>
   {{ post.content}}<br><br>
     <a href="{{ url_for('posts') }}" class="btn btn-dark">Back To Block 👈</a>
+<!--    <a href="{{ url_for('delete_post', id=post.id) }}" class="btn btn-dark">Delete a Post</a>-->
     <a href="{{ url_for('edit_post', id=post.id) }}" class="btn btn-dark">Edit a Post 🔥</a>
 
 </div>
