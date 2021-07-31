@@ -59,16 +59,16 @@ def delete_post(id):
     try:
         db.session.delete(post_to_delete)
         db.session.commit()
-
-    #     return the message to the
-
+        #     return the message to the
         flash("Blog Post was deleted successfully")
-
         # redirecting the user to the home
         posts = Posts.query.order_by(Posts.date_posted)
         return render_template("posts.html", posts=posts)
 
     except:
+        flash("Whoops. There was a problem! Error: deleting failed successfully")
+
+
 
 @app.route('/posts')
 def posts():
