@@ -8,6 +8,7 @@ from datetime import date
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms.widgets import TextArea
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 
 # Create a flask appp
 
