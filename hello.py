@@ -152,7 +152,7 @@ def get_current_date():
 
 # Create the model for the database
 
-class Users(db.Model):
+class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(200), nullable=False, unique=True)
