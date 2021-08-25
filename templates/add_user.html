@@ -52,9 +52,17 @@
  {{ form.name.label(
     class="form-label") }}
 
+ {{ form.username(
+    class="form-control") }}
+    <br>
+
+     {{ form.username.label(
+    class="form-label") }}
+
  {{ form.name(
     class="form-control") }}
     <br>
+
  {{ form.email.label(
     class="form-label") }}
 
@@ -105,7 +113,7 @@
     <tbody>
 {% for our_user in our_users %}
 <tr>
-    <td>{{our_user.id}}.</td>
+    <td>~ {{ our_user.username }} ~ {{our_user.id}}.</td>
     <td>{{our_user.name}}</td>
     <td>{{our_user.email}} ✉️</td>
     <td>{{our_user.favorite_color}}️</td>
