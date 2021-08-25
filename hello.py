@@ -96,7 +96,7 @@ def edit_post(id):
         post.slug = form.slug.data
         post.content = form.content.data
 
-#         add to the database, update the
+        #         add to the database, update the
 
         db.session.add(post)
         db.session.commit()
@@ -108,7 +108,8 @@ def edit_post(id):
     form.slug.data = post.slug
     form.content.data = post.content
 
-    return  render_template("edit_post.html", form=form)
+    return render_template("edit_post.html", form=form)
+
 
 @app.route('/add-post', methods=["GET", "POST"])
 def add_post():
@@ -154,7 +155,7 @@ def get_current_date():
 
 class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    # username = db.Column(db.String(20), nullable=False, unique=True)
+    username = db.Column(db.String(20), nullable=False, unique=True)
     name = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(200), nullable=False, unique=True)
     favorite_color = db.Column(db.String(120))
@@ -203,6 +204,7 @@ def delete(id):
 # Create sign up form
 class UserForm(FlaskForm):
     name = StringField("Name ✍️", validators=[DataRequired()])
+    username = StringField("Username ✍️", validators=[DataRequired()])
     email = StringField("Email ✉️️", validators=[DataRequired()])
     favorite_color = StringField("Favorite Color")
     password_hash = PasswordField('Password', validators=[DataRequired(),
