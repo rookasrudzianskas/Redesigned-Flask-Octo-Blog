@@ -279,7 +279,7 @@ def add_user():
             # Hash password
             hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
             # outputing hashed one
-            user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data,
+            user = Users(username=form.username.data, name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data,
                          password_hash=hashed_pw)
             db.session.add(user)
             db.session.commit()
@@ -287,6 +287,7 @@ def add_user():
         name = form.name.data
         # clears the form for another user
         form.name.data = ''
+        form.username.data = ''
         form.email.data = ''
         form.favorite_color.data = ''
         form.password_hash = ''
