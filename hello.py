@@ -32,6 +32,16 @@ migrate = Migrate(app, db)
 
 # create a blog post model
 
+# create login pages
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    return render_template("login.html", form=form)
+
+
+# create dashboard page
+
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
@@ -279,7 +289,8 @@ def add_user():
             # Hash password
             hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
             # outputing hashed one
-            user = Users(username=form.username.data, name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data,
+            user = Users(username=form.username.data, name=form.name.data, email=form.email.data,
+                         favorite_color=form.favorite_color.data,
                          password_hash=hashed_pw)
             db.session.add(user)
             db.session.commit()

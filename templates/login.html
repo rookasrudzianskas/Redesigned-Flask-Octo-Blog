@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> {{ name }} 👉 {{message}} 🎊
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+<!-- if the user is added succesfully, the name returned and add info-->
+    <h1>Login!</h1>
+
+ <br>
+<!-- table for all the users -->
+
+<div class="shadow p-3 mb-5 bg-body rounded">
+<form action="" method="POST">
+ {{ form.hidden_tag() }}
+
+ {{ form.username.label(
+    class="form-label") }}
+
+ {{ form.username(
+    class="form-control") }}
+    <br>
+
+     {{ form.password.label(
+    class="form-label") }}
+
+ {{ form.password(
+    class="form-control") }}
+    <br>
+
+ {{ form.submit(
+    class="btn btn-secondary") }}
+</form>
+</div>
+
+<br><br>
+
+
+
+ {% endblock %}
