@@ -62,6 +62,7 @@ def login():
 # create dashboard page
 
 @app.route('/dashboard', methods=["GET", "POST"])
+@login_required
 def dashboard():
     return render_template("dashboard.html")
 
