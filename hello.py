@@ -32,6 +32,8 @@ migrate = Migrate(app, db)
 
 # create a blog post model
 
+# create a  login form
+
 # create login pages, to log in
 
 @app.route('/login', methods=["GET", "POST"])
@@ -41,6 +43,11 @@ def login():
 
 
 # create dashboard page
+
+@app.route('/dashboard', methods=["GET", "POST"])
+def dashboard():
+    return render_template("dashboard.html")
+
 
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
