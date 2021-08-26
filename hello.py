@@ -58,8 +58,25 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = Users.query.filter_by(username=form.username.data).first()
+        if user:
+            # check the hashing
+            if check_password_hash(user.password_hash, form.password.data):
+                login_user(user)
+                flash("Login Successfully")
+                return redirect(url_for('dashboard'))
+            else:
+                flash('Wrong Password, try again :)')
+        else:
+            flash("That User Does not Exist, try again 🔥")
     return render_template("login.html", form=form)
 
+
+# create log out
+@app.route('/logout', methods=["GET", "POST"])
+@login_required
+def logout():
+    logout_user()
+    flash("You have been Logged Out. :D")
 
 # create dashboard page
 
