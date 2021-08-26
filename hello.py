@@ -27,14 +27,25 @@ app.config['SECRET_KEY'] = "my super secret key that no one knows"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-
 # this really works
 
 # create a blog post model
 
+# flask login stuff
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
+
+
 # create a  login form
 
-def LoginForm(FlaskForm):
+class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField('Submit')
