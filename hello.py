@@ -32,7 +32,7 @@ migrate = Migrate(app, db)
 
 # create a blog post model
 
-# create login pages
+# create login pages, to log in
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
