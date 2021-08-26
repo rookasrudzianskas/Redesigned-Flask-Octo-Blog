@@ -13,17 +13,6 @@
 
  <br>
 
-        <div class="shadow p-3 mb-5 bg-body rounded">
-            <strong>Name</strong> ~ <br>
-            <strong>Username</strong> ~ <br>
-            <strong>User ID</strong> ~ <br>
-            <strong>Favourite Color:</strong> ~ {{current_user.favorite_color}}<br>
-            <strong>Email</strong> ~ {{current_user.name}}<br>
-            <strong>Date Joined</strong> ~ {{current_user.date_added}}<br>
-        </div>
-
-<!--{% for current_use in current_user %}-->
-
 <table class="table table-dark table-striped table-hover">
 
      <thead>
@@ -34,23 +23,37 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">Name ~</th>
+      <th scope="row">Name</th>
       <td> {{current_user.name}}</td>
     </tr>
     <tr>
-      <th scope="row">Username ~</th>
+      <th scope="row">Username</th>
       <td> {{current_user.username}}</td>
     </tr>
     <tr>
-      <th scope="row">User ID ~</th>
+      <th scope="row">User ID</th>
       <td> {{current_user.id}}</td>
+    </tr>
+
+      <tr>
+      <th scope="row">Favourite Color</th>
+      <td> {{current_user.favorite_color}}</td>
+    </tr>
+
+      <tr>
+      <th scope="row">Email</th>
+      <td> {{current_user.name}}</td>
+    </tr>
+
+      <tr>
+      <th scope="row">Date Joined</th>
+      <td> {{current_user.data_added}}</td>
     </tr>
   </tbody>
 </table>
 
 <br><br>
 
-<!--{% endfor %}-->
 
 
 <a href="{{url_for('logout')}}">Log Out</a>
