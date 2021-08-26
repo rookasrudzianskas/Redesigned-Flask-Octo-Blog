@@ -56,6 +56,8 @@ class LoginForm(FlaskForm):
 @app.route('/login', methods=["GET", "POST"])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        user = Users.query.filter_by(username=form.username.data).first()
     return render_template("login.html", form=form)
 
 
