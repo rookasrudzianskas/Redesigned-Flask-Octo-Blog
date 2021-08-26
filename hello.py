@@ -77,6 +77,7 @@ def login():
 def logout():
     logout_user()
     flash("You have been Logged Out. :D")
+    return redirect(url_for("login"))
 
 # create dashboard page
 
