@@ -14,14 +14,18 @@
  <br>
 
 <a href="{{url_for('logout')}}">Log Out</a>
-<div class="shadow p-3 mb-5 bg-body rounded">
-    <strong>Name</strong> ~ {{current_user.name}}<br>
-    <strong>Username</strong> ~ {{current_user.username}}<br>
-    <strong>User ID</strong> ~ {{current_user.id}}<br>
-    <strong>Favourite Color:</strong> ~ {{current_user.favorite_color}}<br>
-    <strong>Email</strong> ~ {{current_user.name}}<br>
-    <strong>Date Joined</strong> ~ {{current_user.date_added}}<br>
-</div>
+
+        {% if current_user.is_authenticated %}
+
+
+        <div class="shadow p-3 mb-5 bg-body rounded">
+            <strong>Name</strong> ~ {{current_user.name}}<br>
+            <strong>Username</strong> ~ {{current_user.username}}<br>
+            <strong>User ID</strong> ~ {{current_user.id}}<br>
+            <strong>Favourite Color:</strong> ~ {{current_user.favorite_color}}<br>
+            <strong>Email</strong> ~ {{current_user.name}}<br>
+            <strong>Date Joined</strong> ~ {{current_user.date_added}}<br>
+        </div>
 
 <br><br>
 
