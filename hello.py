@@ -34,6 +34,12 @@ migrate = Migrate(app, db)
 
 # create a  login form
 
+def LoginForm(FlaskForm):
+    username = StringField("Username", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+
 # create login pages, to log in
 
 @app.route('/login', methods=["GET", "POST"])
