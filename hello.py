@@ -79,6 +79,7 @@ def logout():
     flash("You have been Logged Out. :D")
     return redirect(url_for("login"))
 
+
 # create dashboard page
 
 @app.route('/dashboard', methods=["GET", "POST"])
@@ -142,6 +143,7 @@ def post(id):
 
 
 @app.route('/posts/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit_post(id):
     post = Posts.query.get_or_404(id)
     form = PostForm()
@@ -167,6 +169,7 @@ def edit_post(id):
 
 
 @app.route('/add-post', methods=["GET", "POST"])
+# @login_required
 def add_post():
     form = PostForm()
 
