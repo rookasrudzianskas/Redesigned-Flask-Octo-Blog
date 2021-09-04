@@ -86,6 +86,7 @@ def logout():
 @login_required
 def dashboard():
     form = UserForm()
+    id = current_user.id
     name_to_update = Users.query.get_or_404(id)
     # checks if the user have submitted form
     if request.method == "POST":
