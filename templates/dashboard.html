@@ -58,6 +58,19 @@
 
 <button type="button" class="btn btn-danger"><a style="text-decoration: none; color: white;" href="{{url_for('logout')}}">Log Out</a></button>
 <button class="btn btn-secondary"><a style="text-decoration: none; color: white;"  href="{{ url_for('update', id=current_user.id) }}">Update Profile</a></button>
+<button class="btn btn-danger"><a style="text-decoration: none; color: white;" href="{{ url_for('delete', id=current_user.id) }}" >Delete</a>
+</button>
+
+<br><br>
+
+<div class="card">
+  <div class="card-header">
+    {{current_user.name}}
+  </div>
+  <div class="card-body">
+    Test
+  </div>
+</div>
 
  {% endblock %}
 
