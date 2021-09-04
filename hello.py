@@ -117,9 +117,8 @@ def dashboard():
     else:
         return render_template("dashboard.html",
                                form=form,
-                               name_to_update=name_to_update,
-                               id=id)
-    return render_template("dashboard.html")
+                               name_to_update=name_to_update)
+    # return render_template("dashboard.html")
 
 
 class Posts(db.Model):
