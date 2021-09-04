@@ -85,6 +85,7 @@ def logout():
 @app.route('/dashboard', methods=["GET", "POST"])
 @login_required
 def dashboard():
+
     return render_template("dashboard.html")
 
 
@@ -285,6 +286,7 @@ def update(id):
         name_to_update.email = request.form['email']
         # updates the color, the field added recently
         name_to_update.favorite_color = request.form['favorite_color']
+        name_to_update.username = request.form["username"]
         try:
             # tries to update the user, if it updates, so the form gets refreshed and user redirected to update.htmls
             db.session.commit()
