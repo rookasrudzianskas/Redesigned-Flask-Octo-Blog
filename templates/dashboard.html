@@ -65,10 +65,45 @@
 
 <div class="card">
   <div class="card-header">
-    {{current_user.name}}
+    Update Profile
   </div>
   <div class="card-body">
-    Test
+    <form action="/update/{{ name_to_update.id }}" method="POST">
+ {{ form.hidden_tag() }}
+
+ {{ form.name.label(
+    class="form-label") }}
+
+ {{ form.name(
+    class="form-control", value=name_to_update.username) }}
+    <br>
+
+     {{ form.username.label(
+    class="form-label") }}
+
+ {{ form.username(
+    class="form-control", value=name_to_update.username) }}
+    <br>
+
+ {{ form.email.label(
+    class="form-label") }}
+
+ {{ form.email(
+    class="form-control", value=name_to_update.email) }}
+
+ <br>
+
+     {{ form.favorite_color.label(
+    class="form-label") }}
+
+ {{ form.favorite_color(
+    class="form-control", value=name_to_update.favorite_color) }}
+    <br>
+ {{ form.submit(
+    class="btn btn-secondary") }}
+
+    <a href="{{ url_for('delete', id=id) }}" class="btn btn-danger" style="margin-left: 20px">Delete</a>
+</form>
   </div>
 </div>
 
