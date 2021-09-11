@@ -114,17 +114,6 @@ def dashboard():
                                id=id)
     # return render_template("dashboard.html")
 
-
-class Posts(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255))
-    content = db.Column(db.Text)
-    author = db.Column(db.String(255))
-    date_posted = db.Column(db.DateTime, default=datetime.utcnow())
-    # something like adds _ to the url
-    slug = db.Column(db.String(255))
-
-
 #     Add post page 🚀
 
 @app.route('/posts/delete/<int:id>')
@@ -222,38 +211,6 @@ def get_current_date():
 
     return favourite_pizza
     # return {"Date": date.today()}
-
-# Create the model for the database
-
-class Users(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), nullable=False, unique=True)
-    name = db.Column(db.String(200), nullable=False)
-    email = db.Column(db.String(200), nullable=False, unique=True)
-    favorite_color = db.Column(db.String(120))
-    data_added = db.Column(db.DateTime, default=datetime.utcnow)
-    # Do some password stuff
-    password_hash = db.Column(db.String(128))
-
-    @property
-    def password(self):
-        raise AttributeError('password is not an readable Attribute!')
-
-    # created setter to set the hashes
-    @password.setter
-    def password(self, password):
-        # take whatever they type in the password field, and generate the hash
-        # it takes the password which we enter to the modal, and pass it to the generate function, which generated the hash from it
-        self.password_hash = generate_password_hash(password)
-
-    def verify_password(self, password):
-        # this one verifies the password, if it is the correct one
-        return check_password_hash(self.password_hash, password)
-
-    #      Create a string
-    def __repr__(self):
-        return '<Name %r>' % self.name
-
 
 # delete the user
 @app.route('/delete/<int:id>')
@@ -429,3 +386,46 @@ def name():
 # login
 
 # all forms works, uploaded to another shit
+
+
+class Posts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255))
+    content = db.Column(db.Text)
+    author = db.Column(db.String(255))
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow())
+    # something like adds _ to the url
+    slug = db.Column(db.String(255))
+
+
+# Create the model for the database
+
+class Users(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), nullable=False, unique=True)
+    name = db.Column(db.String(200), nullable=False)
+    email = db.Column(db.String(200), nullable=False, unique=True)
+    favorite_color = db.Column(db.String(120))
+    data_added = db.Column(db.DateTime, default=datetime.utcnow)
+    # Do some password stuff
+    password_hash = db.Column(db.String(128))
+
+    @property
+    def password(self):
+        raise AttributeError('password is not an readable Attribute!')
+
+    # created setter to set the hashes
+    @password.setter
+    def password(self, password):
+        # take whatever they type in the password field, and generate the hash
+        # it takes the password which we enter to the modal, and pass it to the generate function, which generated the hash from it
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        # this one verifies the password, if it is the correct one
+        return check_password_hash(self.password_hash, password)
+
+    #      Create a string
+    def __repr__(self):
+        return '<Name %r>' % self.name
+
