@@ -39,6 +39,64 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 
+@app.route('/add-post', methods=["GET", "POST"])
+# @login_required
+def add_post():
+    form = PostForm()
+
+    if form.validate_on_submit():
+        post = Posts(title=form.title.data, content=form.content.data, author=form.author.data, slug=form.slug.data)
+        # clear the form
+        form.title.data = ""
+        form.content.data = ""
+        form.author.data = ""
+        form.slug.data = ""
+
+        #         add post data to db
+
+        db.session.add(post)
+        db.session.commit()
+
+        # Return a message
+        flash("Blog Post was Submitted Successfully")
+    #         redirect
+    return render_template("add_post.html", form=form)
+
+
+@app.route('/user/add', methods=["GET", "POST"])
+def add_user():
+    # name because first time there is no form name
+    name = None
+    # initializes users form
+    form = UserForm()
+    #  validates user form
+    if form.validate_on_submit():
+        # goes to the database users and gets the user which email is entered to the field and stores to users variable
+        user = Users.query.filter_by(email=form.email.data).first()
+        # is there is no user with that email, it creates the user with name and email to the users database
+        if user is None:
+            # Hash password
+            hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
+            # outputing hashed one
+            user = Users(username=form.username.data, name=form.name.data, email=form.email.data,
+                         favorite_color=form.favorite_color.data,
+                         password_hash=hashed_pw)
+            db.session.add(user)
+            db.session.commit()
+        #     sets the form name, then user is created or found in the db
+        name = form.name.data
+        # clears the form for another user
+        form.name.data = ''
+        form.username.data = ''
+        form.email.data = ''
+        form.favorite_color.data = ''
+        form.password_hash = ''
+        flash("User added successfully")
+    #     shows what is already added to the db
+    our_users = Users.query.order_by(Users.data_added)
+    return render_template('add_user.html', form=form, name=name, our_users=our_users)
+
+
 # create dashboard page
 
 @app.route('/dashboard', methods=["GET", "POST"])
@@ -79,6 +137,7 @@ def dashboard():
                                name_to_update=name_to_update,
                                id=id)
     # return render_template("dashboard.html")
+
 
 @app.route('/posts/delete/<int:id>')
 def delete_post(id):
@@ -174,30 +233,6 @@ def edit_post(id):
     return render_template("edit_post.html", form=form)
 
 
-@app.route('/add-post', methods=["GET", "POST"])
-# @login_required
-def add_post():
-    form = PostForm()
-
-    if form.validate_on_submit():
-        post = Posts(title=form.title.data, content=form.content.data, author=form.author.data, slug=form.slug.data)
-        # clear the form
-        form.title.data = ""
-        form.content.data = ""
-        form.author.data = ""
-        form.slug.data = ""
-
-        #         add post data to db
-
-        db.session.add(post)
-        db.session.commit()
-
-        # Return a message
-        flash("Blog Post was Submitted Successfully")
-    #         redirect
-    return render_template("add_post.html", form=form)
-
-
 # JSON everything
 @app.route("/date")
 def get_current_date():
@@ -267,40 +302,6 @@ def update(id):
                                form=form,
                                name_to_update=name_to_update,
                                id=id)
-
-
-@app.route('/user/add', methods=["GET", "POST"])
-def add_user():
-    # name because first time there is no form name
-    name = None
-    # initializes users form
-    form = UserForm()
-    #  validates user form
-    if form.validate_on_submit():
-        # goes to the database users and gets the user which email is entered to the field and stores to users variable
-        user = Users.query.filter_by(email=form.email.data).first()
-        # is there is no user with that email, it creates the user with name and email to the users database
-        if user is None:
-            # Hash password
-            hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
-            # outputing hashed one
-            user = Users(username=form.username.data, name=form.name.data, email=form.email.data,
-                         favorite_color=form.favorite_color.data,
-                         password_hash=hashed_pw)
-            db.session.add(user)
-            db.session.commit()
-        #     sets the form name, then user is created or found in the db
-        name = form.name.data
-        # clears the form for another user
-        form.name.data = ''
-        form.username.data = ''
-        form.email.data = ''
-        form.favorite_color.data = ''
-        form.password_hash = ''
-        flash("User added successfully")
-    #     shows what is already added to the db
-    our_users = Users.query.order_by(Users.data_added)
-    return render_template('add_user.html', form=form, name=name, our_users=our_users)
 
 
 # Create a new route
