@@ -39,40 +39,6 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return Users.query.get(int(user_id))
-
-
-# create login pages, to log in
-
-@app.route('/login', methods=["GET", "POST"])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = Users.query.filter_by(username=form.username.data).first()
-        if user:
-            # check the hashing
-            if check_password_hash(user.password_hash, form.password.data):
-                login_user(user)
-                flash("Login Successfully")
-                return redirect(url_for('dashboard'))
-            else:
-                flash('Wrong Password, try again :)')
-        else:
-            flash("That User Does not Exist, try again 🔥")
-    return render_template("login.html", form=form)
-
-
-# create log out
-@app.route('/logout', methods=["GET", "POST"])
-@login_required
-def logout():
-    logout_user()
-    flash("You have been Logged Out. :D")
-    return redirect(url_for("login"))
-
-
 # create dashboard page
 
 @app.route('/dashboard', methods=["GET", "POST"])
@@ -114,8 +80,6 @@ def dashboard():
                                id=id)
     # return render_template("dashboard.html")
 
-#     Add post page 🚀
-
 @app.route('/posts/delete/<int:id>')
 def delete_post(id):
     post_to_delete = Posts.query.get_or_404(id)
@@ -137,6 +101,41 @@ def delete_post(id):
         return render_template("posts.html", posts=posts)
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
+
+
+# create login pages, to log in
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = Users.query.filter_by(username=form.username.data).first()
+        if user:
+            # check the hashing
+            if check_password_hash(user.password_hash, form.password.data):
+                login_user(user)
+                flash("Login Successfully")
+                return redirect(url_for('dashboard'))
+            else:
+                flash('Wrong Password, try again :)')
+        else:
+            flash("That User Does not Exist, try again 🔥")
+    return render_template("login.html", form=form)
+
+
+# create log out
+@app.route('/logout', methods=["GET", "POST"])
+@login_required
+def logout():
+    logout_user()
+    flash("You have been Logged Out. :D")
+    return redirect(url_for("login"))
+
+
+#     Add post page 🚀
 @app.route('/posts')
 def posts():
     posts = Posts.query.order_by(Posts.date_posted)
@@ -211,6 +210,7 @@ def get_current_date():
 
     return favourite_pizza
     # return {"Date": date.today()}
+
 
 # delete the user
 @app.route('/delete/<int:id>')
@@ -383,6 +383,7 @@ def name():
                            form=form,
                            )
 
+
 # login
 
 # all forms works, uploaded to another shit
@@ -428,4 +429,3 @@ class Users(db.Model, UserMixin):
     #      Create a string
     def __repr__(self):
         return '<Name %r>' % self.name
-
