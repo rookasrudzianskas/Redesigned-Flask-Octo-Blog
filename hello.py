@@ -323,17 +323,9 @@ def update(id):
                                id=id)
 
 
-class PasswordForm(FlaskForm):
-    email = StringField("What is your email? ㊙️", validators=[DataRequired()])
-    password = PasswordField("What is your password? ㊙️", validators=[DataRequired()])
-    submit = SubmitField("Submit")
 
 
-# Create a form class
 
-class NameForm(FlaskForm):
-    name = StringField("What is your name? ㊙️", validators=[DataRequired()])
-    submit = SubmitField("Submit")
 
 
 @app.route('/user/add', methods=["GET", "POST"])
