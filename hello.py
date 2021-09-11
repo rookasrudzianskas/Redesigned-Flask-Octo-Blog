@@ -9,6 +9,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms.widgets import TextArea
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from webforms import LoginForm, PostForm, UserForm, PasswordForm, NameForm
 
 # Create a flask appp
 
@@ -41,8 +42,6 @@ login_manager.login_view = 'login'
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
-
-
 
 
 # create login pages, to log in
@@ -124,9 +123,6 @@ class Posts(db.Model):
     date_posted = db.Column(db.DateTime, default=datetime.utcnow())
     # something like adds _ to the url
     slug = db.Column(db.String(255))
-
-
-
 
 
 #     Add post page 🚀
@@ -281,9 +277,6 @@ def delete(id):
         return render_template('add_user.html', form=form, name=name, our_users=our_users)
 
 
-
-
-
 # update the database record
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
@@ -321,11 +314,6 @@ def update(id):
                                form=form,
                                name_to_update=name_to_update,
                                id=id)
-
-
-
-
-
 
 
 @app.route('/user/add', methods=["GET", "POST"])
