@@ -58,6 +58,13 @@
 </div>
 
 <br><br>
+
+{% else %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Sorry you cannot edit this user
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
   {% endif %}
 
  {% endblock %}
