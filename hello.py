@@ -17,6 +17,7 @@ app = Flask(__name__)
 # Add the database
 
 
+# ------------------------------------- db stuff -------------------------------------------------------
 # old sqllite db
 # DB
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -28,6 +29,9 @@ app.config['SECRET_KEY'] = "my super secret key that no one knows"
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+# ------------------------------------- end of db stuff -------------------------------------------------------
+
 
 # this really works
 
