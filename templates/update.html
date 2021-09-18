@@ -16,6 +16,10 @@
   {% else %}
     <h1>User Update: 🔥</h1>
 <br>
+ID TO UPDATE: {{ id}}
+<br>
+current id: {{ current_user.id}}
+<br>
 <div class="shadow p-3 mb-5 bg-body rounded">
 <form action="/update/{{ name_to_update.id }}" method="POST">
  {{ form.hidden_tag() }}
