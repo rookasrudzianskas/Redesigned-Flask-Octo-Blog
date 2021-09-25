@@ -55,7 +55,7 @@ def add_post():
         # clear the form
         form.title.data = ""
         form.content.data = ""
-        form.author.data = ""
+        # form.author.data = ""
         form.slug.data = ""
 
         #         add post data to db
@@ -220,7 +220,7 @@ def edit_post(id):
     form = PostForm()
     if form.validate_on_submit():
         post.title = form.title.data
-        post.author = form.author.data
+        # post.author = form.author.data
         post.slug = form.slug.data
         post.content = form.content.data
 
@@ -232,7 +232,7 @@ def edit_post(id):
         return redirect(url_for("post", id=post.id))
 
     form.title.data = post.title
-    form.author.data = post.author
+    # form.author.data = post.author
     form.slug.data = post.slug
     form.content.data = post.content
 
