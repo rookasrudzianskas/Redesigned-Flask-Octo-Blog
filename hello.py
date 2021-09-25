@@ -395,19 +395,19 @@ def name():
 
 # all forms works, uploaded to another shit
 
-
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
     content = db.Column(db.Text)
-    author = db.Column(db.String(255))
+    # author = db.Column(db.String(255))
     date_posted = db.Column(db.DateTime, default=datetime.utcnow())
     # something like adds _ to the url
     slug = db.Column(db.String(255))
+    #     foreign key to link the users.
+    poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
 # Create the model for the database
-
 class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
@@ -417,6 +417,8 @@ class Users(db.Model, UserMixin):
     data_added = db.Column(db.DateTime, default=datetime.utcnow)
     # Do some password stuff
     password_hash = db.Column(db.String(128))
+    # user can have many posts
+    posts = db.relationship('Posts', backref='poster')
 
     @property
     def password(self):
