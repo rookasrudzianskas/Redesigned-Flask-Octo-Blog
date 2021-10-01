@@ -144,21 +144,22 @@ def dashboard():
 def delete_post(id):
     post_to_delete = Posts.query.get_or_404(id)
     id = current_user.id
-    try:
-        db.session.delete(post_to_delete)
-        db.session.commit()
-        #     return the message to the
-        flash("Blog Post was deleted successfully")
-        # redirecting the user to the home
-        posts = Posts.query.order_by(Posts.date_posted)
-        return render_template("posts.html", posts=posts)
+    if id == post_to_delete.poster.id:
+        try:
+            db.session.delete(post_to_delete)
+            db.session.commit()
+            #     return the message to the
+            flash("Blog Post was deleted successfully")
+            # redirecting the user to the home
+            posts = Posts.query.order_by(Posts.date_posted)
+            return render_template("posts.html", posts=posts)
 
-    except:
-        # the message
-        flash("Whoops. There was a problem! Error: deleting failed successfully")
-        posts = Posts.query.order_by(Posts.date_posted)
-        # redirecting the user to the home
-        return render_template("posts.html", posts=posts)
+        except:
+            # the message
+            flash("Whoops. There was a problem! Error: deleting failed successfully")
+            posts = Posts.query.order_by(Posts.date_posted)
+            # redirecting the user to the home
+            return render_template("posts.html", posts=posts)
 
 
 @login_manager.user_loader
