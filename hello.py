@@ -143,7 +143,7 @@ def dashboard():
 @login_required
 def delete_post(id):
     post_to_delete = Posts.query.get_or_404(id)
-
+    id = current_user.id
     try:
         db.session.delete(post_to_delete)
         db.session.commit()
