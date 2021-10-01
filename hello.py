@@ -11,8 +11,7 @@ from wtforms.widgets import TextArea
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from webforms import LoginForm, PostForm, UserForm, PasswordForm, NameForm
 
-# Create a flask appp
-
+# Create a flask app
 app = Flask(__name__)
 # Add the database
 
