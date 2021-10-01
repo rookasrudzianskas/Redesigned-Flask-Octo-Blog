@@ -161,6 +161,13 @@ def delete_post(id):
             # redirecting the user to the home
             return render_template("posts.html", posts=posts)
 
+    else:
+        # the message
+        flash("Whoops. You are not authorized to delete that post")
+        posts = Posts.query.order_by(Posts.date_posted)
+        # redirecting the user to the home
+        return render_template("posts.html", posts=posts)
+
 
 @login_manager.user_loader
 def load_user(user_id):
