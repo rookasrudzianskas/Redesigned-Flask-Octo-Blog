@@ -326,7 +326,7 @@ def user(name):
     return render_template("user.html", user_name=name)
 
 
-# custom errror pages
+# custom error pages
 
 @app.errorhandler(404)
 def page_not_found(e):
