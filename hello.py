@@ -140,6 +140,7 @@ def dashboard():
 
 
 @app.route('/posts/delete/<int:id>')
+@login_required
 def delete_post(id):
     post_to_delete = Posts.query.get_or_404(id)
 
