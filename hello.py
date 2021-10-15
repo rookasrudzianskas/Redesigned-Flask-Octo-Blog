@@ -234,7 +234,7 @@ def edit_post(id):
         return redirect(url_for("post", id=post.id))
 
 
-    if current_user.id == post.poster_id
+    if current_user.id == post.poster_id:
         form.title.data = post.title
         # form.author.data = post.author
         form.slug.data = post.slug
