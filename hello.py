@@ -25,7 +25,6 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 # ------------------------------------- end of db stuff -------------------------------------------------------
-# ok
 
 # this really works
 
