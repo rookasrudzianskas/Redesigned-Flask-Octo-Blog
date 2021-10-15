@@ -233,12 +233,14 @@ def edit_post(id):
         flash("Post has been updated 🚀")
         return redirect(url_for("post", id=post.id))
 
-    form.title.data = post.title
-    # form.author.data = post.author
-    form.slug.data = post.slug
-    form.content.data = post.content
 
-    return render_template("edit_post.html", form=form)
+    if current_user.id == post.poster_id
+        form.title.data = post.title
+        # form.author.data = post.author
+        form.slug.data = post.slug
+        form.content.data = post.content
+
+        return render_template("edit_post.html", form=form)
 
 
 # JSON everything
