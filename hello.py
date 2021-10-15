@@ -242,6 +242,9 @@ def edit_post(id):
         return render_template("edit_post.html", form=form)
     else:
         flash("You are not allowed to edit post")
+        posts = Posts.query.order_by(Posts.date_posted)
+        return render_template("posts.html", posts=posts)
+
 
 
 # JSON everything
