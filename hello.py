@@ -246,7 +246,6 @@ def edit_post(id):
         return render_template("posts.html", posts=posts)
 
 
-
 # JSON everything
 @app.route("/date")
 def get_current_date():
