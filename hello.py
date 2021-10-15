@@ -233,7 +233,6 @@ def edit_post(id):
         flash("Post has been updated 🚀")
         return redirect(url_for("post", id=post.id))
 
-
     if current_user.id == post.poster_id:
         form.title.data = post.title
         # form.author.data = post.author
@@ -241,6 +240,8 @@ def edit_post(id):
         form.content.data = post.content
 
         return render_template("edit_post.html", form=form)
+    else:
+        flash("You are not allowed to edit post")
 
 
 # JSON everything
@@ -443,4 +444,3 @@ class Users(db.Model, UserMixin):
     #      Create a string
     def __repr__(self):
         return '<Name %r>' % self.name
-
