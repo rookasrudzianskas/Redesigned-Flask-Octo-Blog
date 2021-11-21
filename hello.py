@@ -37,6 +37,18 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 
+# Create a Search function
+@app.route('/search', methods=["POST"])
+def search():
+    if request.method == "POST":
+        # get the search term from the form
+        search_term = request.form.get("search_term")
+        # get the posts that match the search term
+        posts = Posts.query.filter(Posts.title.contains(search_term)).all()
+        # render the template with the posts
+        return render_template("search.html", posts=posts, search_term=search_term)
+
+
 @app.route('/add-post', methods=["GET", "POST"])
 # @login_required
 def add_post():
