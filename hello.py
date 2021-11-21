@@ -37,6 +37,13 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 
+# pass stuff to navbar
+@app.context_processor
+def base():
+    form = SearchForm()
+    return dict(form=form)
+
+
 # Create a Search function
 @app.route('/search', methods=["POST"])
 def search():
