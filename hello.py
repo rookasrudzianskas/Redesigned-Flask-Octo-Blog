@@ -48,17 +48,18 @@ def base():
 @app.route('/search', methods=["POST"])
 def search():
     form = SearchForm()
-    posts = Post.query
+    posts = Posts.query
     if form.validate_on_submit():
-        # getting data from the form
+        # Get data from submitted form
         post.searched = form.searched.data
-        # filter the database
+        # Query the Database
         posts = posts.filter(Posts.content.like('%' + post.searched + '%'))
         posts = posts.order_by(Posts.title).all()
-        # search_results = Posts.query.filter(Posts.title.contains(search_term)).all()
-        return render_template("search.html", form=form, searched=post.searched, posts=posts)
-    else:
-        return render_template("search.html", form=form)
+
+        return render_template("search.html",
+                               form=form,
+                               searched=post.searched,
+                               posts=posts)
 
 
 @app.route('/add-post', methods=["GET", "POST"])
