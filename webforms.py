@@ -7,8 +7,8 @@ from wtforms.widgets import TextArea
 
 # create a search form
 class SearchForm(FlaskForm):
-    searched = StringField('Searched', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    searched = StringField("Searched", validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 
 # create a  login form
