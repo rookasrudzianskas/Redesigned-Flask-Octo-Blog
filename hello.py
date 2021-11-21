@@ -5,6 +5,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from webforms import LoginForm, PostForm, UserForm, PasswordForm, NameForm, SearchForm
+from flask_ckeditor import CKEditor
 
 # Create a flask app
 app = Flask(__name__)
