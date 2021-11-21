@@ -4,6 +4,11 @@
      <br>
     <div style="text-align: center;">
         <h1>You have searched for:</h1>
-        <p>{{ searched  }}</p>
+        <br>
+        {% for post in posts %}
+            	<a href="{{ url_for('post', id=post.id)}}">
+			        The post - {{ post.title }}
+		        </a><br/>
+        {% endfor %}
     </div>
  {% endblock %}
