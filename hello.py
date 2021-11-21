@@ -42,9 +42,9 @@ login_manager.login_view = 'login'
 def search():
     form = SearchForm()
     if form.validate_on_submit():
-        search_term = form.search.data
-        search_results = Posts.query.filter(Posts.title.contains(search_term)).all()
-        return render_template("search.html", search_results=search_results)
+        post.searched = form.search.data
+        # search_results = Posts.query.filter(Posts.title.contains(search_term)).all()
+        return render_template("search.html", form=form, searched=post.searched)
     else:
         return render_template("search.html", form=form)
 
