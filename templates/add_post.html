@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    {{ ckeditor.load() }}
-
 
 {% for message in get_flashed_messages() %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
