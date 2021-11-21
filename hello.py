@@ -40,7 +40,13 @@ login_manager.login_view = 'login'
 # Create a Search function
 @app.route('/search', methods=["POST"])
 def search():
-
+    form = SearchForm()
+    if form.validate_on_submit():
+        search_term = form.search.data
+        search_results = Posts.query.filter(Posts.title.contains(search_term)).all()
+        return render_template("search.html", search_results=search_results)
+    else:
+        return render_template("search.html", form=form)
 
 
 @app.route('/add-post', methods=["GET", "POST"])
