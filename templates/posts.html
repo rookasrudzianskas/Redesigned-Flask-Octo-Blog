@@ -18,7 +18,7 @@
     By: {{ post.poster.email }} <br>
     <small>{{ post.slug }} <br>
     {{ post.date_posted }} </small><br><br>
-  {{ post.content}}<br><br>
+  {{ post.content|safe}}<br><br>
     <a class="btn btn-dark" href="{{ url_for('post', id=post.id )}}">View Post 👉</a>
         {% if post.poster_id == current_user.id %}
             <a class="btn btn-danger" href="{{ url_for('delete_post', id=post.id )}}">Delete a Post</a>
