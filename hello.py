@@ -9,6 +9,7 @@ from flask_ckeditor import CKEditor
 
 # Create a flask app
 app = Flask(__name__)
+# CKeditor
 ckeditor = CKEditor(app)
 
 # Add the database
